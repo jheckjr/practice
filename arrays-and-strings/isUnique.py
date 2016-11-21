@@ -6,10 +6,10 @@ String is composed of ASCII characters.
 '''
 
 def isUnique(s):
-    if len(s) > 128:
+    if len(s) > 256:
         return False
         
-    arr = [0] * 128
+    arr = [0] * 256
     
     for c in s:
         if arr[ord(c)]:
@@ -21,7 +21,7 @@ def isUnique(s):
     
 # Assume you cannot create a new data structure
 def isUnique2(s):
-    if len(s) > 128:
+    if len(s) > 256:
         return False
         
     for i in xrange(len(s)):
