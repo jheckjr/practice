@@ -3,13 +3,6 @@ Problem:
 Hacker Rank - Solving one problem with another
 '''
 
-### TODO ###
-# Get original N, M, K
-# Build array of tuples for each pair (min, max)
-# Get E (M lines)
-# Remove each edge (u,v) from array when received
-# Print N, M', K'
-# Print each tuple in array
 def solve(f):
     # Get N, M, and K
     N, M, K = [int(x) for x in f.readline().strip().split(' ')]
