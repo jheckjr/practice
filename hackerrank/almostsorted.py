@@ -4,7 +4,6 @@ Problem:
 Hacker Rank - Almost sorted
 '''
 
-### TODO ###
 # helper functions
 # dec means out of order item found so check for reverse
 def inOrder(arr, index):
@@ -12,7 +11,7 @@ def inOrder(arr, index):
         if 1 < len(arr):
             return arr[index] < arr[index + 1]
         else:
-            return true
+            return True
     elif index == len(arr) - 1:
         return arr[index - 1] < arr[index]
     else:
@@ -32,64 +31,75 @@ def reverse(arr, first, second):
     return arr
 
 def isSorted(arr):
-    return all(arr[x] < arr[x+1] for x in range(0,len(arr)-1))
+    return all(arr[x] < arr[x+1] for x in range(len(arr)-1))
 
 def checkSwap(arr, first, second):
     swapArr = list(arr)
     
     if isSorted(swap(swapArr, first, second)):
-        print('yes')
-        print('swap ' + str(first + 1) + ' ' + str(second + 1))
-        return True
+        result = ['yes']
+        result.append('swap ' + str(first + 1) + ' ' + str(second + 1))
+        return result
     
-    return False
+    return None
 
 def checkRev(arr, first, second):
     revArr = list(arr)
     
     if isSorted(reverse(revArr, first, second)):
-        print('yes')
-        print('reverse ' + str(first + 1) + ' ' + str(second + 1))
-        return True
+        result = ['yes']
+        result.append('reverse ' + str(first + 1) + ' ' + str(second + 1))
+        return result
         
-    return False
+    return None
             
-# main execution
-n = int(input())
-
-array = [int(x) for x in input().split(' ')];
-# start from start and end and look for out of place elements
-# when pair found, try swap, then try reverse
-# check for sorted
-if isSorted(array):
-    print('yes')
-else:
-    first = -1
-    second = -1
+def solve(f):
+    result = []
+    n = int(f.readline().strip())
     
-    for x in range(0,n):
-        if -1 == first and not inOrder(array, x):
-            first = x
-        
-        if -1 == second and not inOrder(array, n - 1 - x):
-            second = n - 1 - x
-    
-    sorted = False
-    
-    if -1 < first and -1 < second:
-        if not checkSwap(array, first, second):
-            if not checkRev(array, first, second):
-                print('no')
+    array = [int(x) for x in f.readline().strip().split(' ')];
+    # start from start and end and look for out of place elements
+    # when pair found, try swap, then try reverse
+    # check for sorted
+    if isSorted(array):
+        result = ['yes']
     else:
-        print('no')
+        first = -1
+        second = -1
+        
+        for x in range(n):
+            if -1 == first and not inOrder(array, x):
+                first = x
+            
+            if -1 == second and not inOrder(array, n - 1 - x):
+                second = n - 1 - x
+        
+        if -1 < first and -1 < second:
+            result = checkSwap(array, first, second)
+            if not result:
+                result = checkRev(array, first, second)
+                if not result:
+                    result = ['no']
+        else:
+            result = ['no']
+            
+    return result
     
-'''
-yes  
-swap 1 2
-
-no
-
-yes
-reverse 2 5
-
-'''
+def test():
+    with open('almostsorted.txt', 'r') as f:
+        result = solve(f)
+        assert result[0] == 'yes'
+        assert result[1] == 'swap 1 2'
+        
+        f.readline()
+        result = solve(f)
+        assert result[0] == 'no'
+        
+        f.readline()
+        result = solve(f)
+        assert result[0] == 'yes'
+        assert result[1] == 'reverse 2 5'
+        
+    print("Test passed")
+    
+test()
