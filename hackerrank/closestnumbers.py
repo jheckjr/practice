@@ -4,13 +4,12 @@ Problem:
 Hacker Rank - Closest Numbers
 '''
 
-### TODO ###
 import heapq
 import sys
     
 def process(f):
-    n = int(input().strip())
-    heap = [int(x) for x in input().strip().split()]
+    n = int(f.readline().strip())
+    heap = [int(x) for x in f.readline().strip().split()]
     output = []
     
     heapq.heapify(heap)
@@ -32,13 +31,15 @@ def process(f):
         output.append(second)
         first = second
         
-    print(' '.join(str(x) for x in output))
+    return output
         
 def test():
-    with open('funnystring.txt', 'r') as f:
+    with open('closestnumbers.txt', 'r') as f:
         result = process(f)
         assert result == [-20, 30]
+        result = process(f)
         assert result == [-520, -470, -20, 30]
+        result = process(f)
         assert result == [2, 3, 3, 4, 4, 5]
         
     print("Test passed")

@@ -1,6 +1,6 @@
 '''
 Problem:
-Hacker Rank - Two Strings
+Hacker Rank - Funny String
 '''
 
 import sys
